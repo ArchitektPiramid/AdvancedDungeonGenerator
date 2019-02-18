@@ -16,13 +16,18 @@ public class DungeonGeneratorRoomUI : MonoBehaviour
     private Image _myIMG = null;
     [Space(10)]
     public TMPro.TextMeshProUGUI txtRoom = null;
-
+ 
 	private DungeonRoom _myRoomData = null;
 
     private void Awake() {
         this._myIMG = this.gameObject.GetComponent<Image>();
 		this._roomTypeIMG.gameObject.SetActive(false);
+        // for (int i = 0; i < 2; i++) {
+        //     var newGO = new GameObject("BLABLA " + i.ToString(), typeof(Image));
+        //     newGO.transform.parent = this.gameObject.transform;
+        // }
     }
+
 
 	public Vector2 GetRealPosition() {
 		return Vector2.zero;
