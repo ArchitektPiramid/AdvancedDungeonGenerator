@@ -21,6 +21,7 @@ public class DungeonGeneratorUI : MonoBehaviour
 
     private void Awake() {
         this._myImgPref = this.SingleRoomPrefab.gameObject.GetComponent<RectTransform>();
+        this._myImgPref.gameObject.SetActive(true);
         this._imgX = this._myImgPref.rect.width + this.imgOffset;
         this._imgY = this._myImgPref.rect.height + this.imgOffset;
         //ChangeMapSize(2f); //TODO:

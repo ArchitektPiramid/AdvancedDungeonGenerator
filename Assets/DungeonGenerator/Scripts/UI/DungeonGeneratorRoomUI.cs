@@ -19,14 +19,16 @@ public class DungeonGeneratorRoomUI : MonoBehaviour
  
 	private DungeonRoom _myRoomData = null;
 
+
     private void Awake() {
         this._myIMG = this.gameObject.GetComponent<Image>();
 		this._roomTypeIMG.gameObject.SetActive(false);
-        // for (int i = 0; i < 2; i++) {
-        //     var newGO = new GameObject("BLABLA " + i.ToString(), typeof(Image));
-        //     newGO.transform.parent = this.gameObject.transform;
-        // }
     }
+
+    // private void Start() {
+    //     this._myIMG = this.gameObject.GetComponent<Image>();
+	// 	this._roomTypeIMG.gameObject.SetActive(false);
+    // }
 
 
 	public Vector2 GetRealPosition() {
