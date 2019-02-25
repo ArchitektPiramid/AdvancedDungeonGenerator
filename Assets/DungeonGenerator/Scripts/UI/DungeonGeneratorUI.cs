@@ -6,11 +6,11 @@ using UnityEngine;
 public class DungeonGeneratorUI : MonoBehaviour
 {
     public DungeonGeneratorRoomUI SingleRoomPrefab = null;
-    [SerializeField] private float imgOffset = 0f;
+    [SerializeField] private Vector2 imgOffset = new Vector2(0f, 0f);
 	[SerializeField] public Transform elementsContainer = null;
     [SerializeField] public Transform maskContainer = null;
 
-    private RectTransform _myImgPref = null;
+    //public RectTransform _myImgPref = null;
     private float _imgX = 0f;
     private float _imgY = 0f;
     private List<DungeonGeneratorRoomUI> _myRoomList = new List<DungeonGeneratorRoomUI>();
@@ -20,10 +20,13 @@ public class DungeonGeneratorUI : MonoBehaviour
 	}
 
     private void Awake() {
-        this._myImgPref = this.SingleRoomPrefab.gameObject.GetComponent<RectTransform>();
-        this._myImgPref.gameObject.SetActive(true);
-        this._imgX = this._myImgPref.rect.width + this.imgOffset;
-        this._imgY = this._myImgPref.rect.height + this.imgOffset;
+        var tempRect = this.SingleRoomPrefab.gameObject.GetComponent<RectTransform>();
+        this._imgX = tempRect.rect.width + this.imgOffset.x;
+        this._imgY = tempRect.rect.height + this.imgOffset.y;
+		// this._myImgPref = this.SingleRoomPrefab.gameObject.GetComponent<RectTransform>();
+        // this._myImgPref.gameObject.SetActive(true);
+        // this._imgX = this._myImgPref.rect.width + this.imgOffset.x;
+        // this._imgY = this._myImgPref.rect.height + this.imgOffset.y;
         //ChangeMapSize(2f); //TODO:
     }
 
@@ -31,7 +34,8 @@ public class DungeonGeneratorUI : MonoBehaviour
         this.Clear();
         foreach(DungeonRoom room in myRooms) {
             DungeonGeneratorRoomUI newRoom = Instantiate(this.SingleRoomPrefab, this.transform.position, Quaternion.identity, this.elementsContainer);
-            newRoom.SetRoomTxt(string.Format("{0}:{1}", room.GetPosX, room.GetPosY));
+            newRoom.gameObject.SetActive(true);
+			newRoom.SetRoomTxt(string.Format("{0}:{1}", room.GetPosX, room.GetPosY));
             newRoom.SetRoomData(room);
 		    newRoom.transform.localPosition = new Vector2(_imgX * room.GetPosX, _imgY * room.GetPosY);
             this._myRoomList.Add(newRoom);

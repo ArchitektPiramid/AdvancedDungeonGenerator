@@ -32,13 +32,16 @@ public class DungeonGenerator : MonoBehaviour {
 	}
 
 	private void Update() {
-		RectTransform rt = (RectTransform)this.generateUI.maskContainer.transform;
-		foreach (var item in myRooms) {
-			if(item.roomType == DungeonRoom.RoomType.Start) {
-				this.generateUI.elementsContainer.position = (-this.GetCurrentRoomUIPos(item)
-				- new Vector2(rt.rect.width / 2f, rt.rect.height /2f))
-				+ new Vector2(this.generateUI.maskContainer.position.x, this.generateUI.maskContainer.position.y);
-			}
+		// RectTransform rt = (RectTransform)this.generateUI.maskContainer.transform;
+		// foreach (var item in myRooms) {
+		// 	if(item.roomType == DungeonRoom.RoomType.Start) {
+		// 		this.generateUI.elementsContainer.position = (-this.GetCurrentRoomUIPos(item)
+		// 		- new Vector2(rt.rect.width / 2f, rt.rect.height /2f))
+		// 		+ new Vector2(this.generateUI.maskContainer.position.x, this.generateUI.maskContainer.position.y);
+		// 	}
+		// }
+		if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) {
+			this.generateUI.elementsContainer.position += (Vector3)generateUI.GetTotalImgSize();
 		}
 	}
 
@@ -49,6 +52,21 @@ public class DungeonGenerator : MonoBehaviour {
 		this.SetBoosRoom();
 
 		this.generateUI.placeAllRooms(this.myRooms);
+
+		// foreach (var item in myRooms) {
+		// 	if(item.roomType == DungeonRoom.RoomType.Start) {
+		// 		this.generateUI.elementsContainer.position = GetCurrentRoomUIPos(item);
+		// 	}
+		// }
+
+				// RectTransform rt = (RectTransform)this.generateUI.maskContainer.transform;
+		// foreach (var item in myRooms) {
+		// 	if(item.roomType == DungeonRoom.RoomType.Start) {
+		// 		this.generateUI.elementsContainer.position = (-this.GetCurrentRoomUIPos(item)
+		// 		- new Vector2(rt.rect.width / 2f, rt.rect.height /2f))
+		// 		+ new Vector2(this.generateUI.maskContainer.position.x, this.generateUI.maskContainer.position.y);
+		// 	}
+		// }
 	}
 
 	public Vector2 GetCurrentRoomUIPos(DungeonRoom room) {
@@ -60,8 +78,10 @@ public class DungeonGenerator : MonoBehaviour {
 
 
     private void PlaceFirstRoom() {
-		int startX = System.Convert.ToInt32(UnityEngine.Random.Range(0, this.GetMaxDungSizeX));
-		int startY = System.Convert.ToInt32(UnityEngine.Random.Range(0, this.GetMaxDungSizeY));
+	// 	int startX = System.Convert.ToInt32(UnityEngine.Random.Range(0, this.GetMaxDungSizeX));
+	// 	int startY = System.Convert.ToInt32(UnityEngine.Random.Range(0, this.GetMaxDungSizeY));
+		int startX = 0;
+		int startY = 0;
 
 		var startRoom = new DungeonRoom(new Vector2Int(startX, startY), DungeonRoom.RoomType.Start);
 		this.AddRoomToDungeon(startRoom);
@@ -178,7 +198,7 @@ public class DungeonGenerator : MonoBehaviour {
 }
 
 [System.Serializable]
-public class DungeonRoom
+public class DungeonRoom //TODO in separated class
 {
 	[System.Flags]
 	public enum RoomDoors {
@@ -196,7 +216,7 @@ public class DungeonRoom
 	public Vector2Int roomPos = Vector2Int.zero;
 	public RoomType roomType = RoomType.None;
 	public RoomDoors doors = RoomDoors.None;
-
+	
 	public Vector2Int GetPosition { get { return this.roomPos; } }
 	public int GetPosX { get { return this.roomPos.x; } }
 	public int GetPosY { get { return this.roomPos.y; } }
