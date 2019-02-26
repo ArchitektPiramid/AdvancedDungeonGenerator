@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class DungeonGeneratorUI : MonoBehaviour
 {
     public DungeonGeneratorRoomUI SingleRoomPrefab = null;
     [SerializeField] private Vector2 imgOffset = new Vector2(0f, 0f);
+	public Vector2 scalingSize = new Vector2(1f, 1f);
 	[SerializeField] public Transform elementsContainer = null;
     [SerializeField] public Transform maskContainer = null;
+	private ScaleConstraint _myScale = null;
 
     //public RectTransform _myImgPref = null;
     private float _imgX = 0f;
@@ -20,6 +23,7 @@ public class DungeonGeneratorUI : MonoBehaviour
 	}
 
     private void Awake() {
+		this._myScale = this.elementsContainer.gameObject.GetComponent<ScaleConstraint>();
         var tempRect = this.SingleRoomPrefab.gameObject.GetComponent<RectTransform>();
         this._imgX = tempRect.rect.width + this.imgOffset.x;
         this._imgY = tempRect.rect.height + this.imgOffset.y;
@@ -29,6 +33,11 @@ public class DungeonGeneratorUI : MonoBehaviour
         // this._imgY = this._myImgPref.rect.height + this.imgOffset.y;
         //ChangeMapSize(2f); //TODO:
     }
+
+	private void Start() {
+		_myScale.scaleAtRest = (Vector3)scalingSize;
+	}
+
 
     public void placeAllRooms(List<DungeonRoom> myRooms) { //TODO: PlaceAllRooms name
         this.Clear();

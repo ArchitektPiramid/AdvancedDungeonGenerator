@@ -160,11 +160,11 @@ ScaleConstraint:
   m_Weight: 1
   m_ScaleAtRest: {x: 1, y: 1, z: 1}
   m_ScaleOffset: {x: 1, y: 1, z: 1}
-  m_AffectScalingX: 1
-  m_AffectScalingY: 1
-  m_AffectScalingZ: 1
-  m_IsContraintActive: 0
-  m_IsLocked: 0
+  m_AffectScalingX: 0
+  m_AffectScalingY: 0
+  m_AffectScalingZ: 0
+  m_IsContraintActive: 1
+  m_IsLocked: 1
   m_Sources: []
 --- !u!222 &176556617
 CanvasRenderer:
@@ -563,6 +563,7 @@ MonoBehaviour:
   SingleRoomPrefab: {fileID: 9093938889252930701, guid: 027c3ebbef4209146af7c34f812b6458,
     type: 3}
   imgOffset: {x: 5, y: 5}
+  scalingSize: {x: 0.5, y: 0.5}
   elementsContainer: {fileID: 176556615}
   maskContainer: {fileID: 263911521}
 --- !u!114 &1362581513
